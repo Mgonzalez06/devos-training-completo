@@ -62,5 +62,5 @@ spec:
           prefix: "/strinity"
       route:
         - destination:
-            host: strinity-service.cgomez.svc.cluster.local
+            host: strinity-service.strinity.svc.cluster.local
 
