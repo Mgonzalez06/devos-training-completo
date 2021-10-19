@@ -39,7 +39,7 @@ podTemplate(yaml: '''
     properties([
       pipelineTriggers([[
         $class: 'GenericTrigger',
-        token: 'cgomez_cd',
+        token: 'strinity',
         genericVariables: [[key: 'ref', value: '$.ref']],
         regexpFilterText:"\$ref",
         regexpFilterExpression: 'refs/heads/main'
@@ -60,8 +60,8 @@ podTemplate(yaml: '''
           sh 'mkdir -p ~/.kube/'
           sh 'cp $FILE ~/.kube/config'
           sh 'kubectl apply -f page.yaml'
-          sh 'kubectl label namespace cgomez istio-injection=enabled --overwrite'
-          sh 'kubectl rollout restart -n cgomez deployment/cgomez-deployment'
+          sh 'kubectl label namespace strinity istio-injection=enabled --overwrite'
+          sh 'kubectl rollout restart -n strinity deployment/strinity-deployment'
         }
       }
     }
