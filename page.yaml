@@ -2,31 +2,31 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: cgomez
+  name: strinity
   labels:
-    name: cgomez
+    name: strinity
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cgomez-deployment
-  namespace: cgomez
+  name: strinity-deployment
+  namespace: strinity
   labels:
-    app: cgomez
+    app: strinity
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cgomez
+      app: strinity
   template:
     metadata:
       labels:
-        app: cgomez
+        app: strinity
     spec:
       nodeSelector:
         purpose: general
       containers:
-      - name: cgomez
+      - name: strinity
         image: charlie83gs/react_page:latest
         ports:
         - containerPort: 3000
@@ -35,11 +35,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cgomez-service
-  namespace: cgomez
+  name: strinity-service
+  namespace: strinity
 spec:
   selector:
-    app: cgomez
+    app: strinity
   ports:
   - protocol: TCP
     port: 3000
@@ -48,19 +48,19 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: cgomez
-  namespace: cgomez
+  name: strinity
+  namespace: strinity
 spec:
   hosts:
   - "*"
   gateways:
   - istio-custom/devops-gateway
   http:
-    - name: "cgomez-routes"
+    - name: "strinity-routes"
       match:
       - uri: 
-          prefix: "/cgomez"
+          prefix: "/strinity"
       route:
         - destination:
-            host: cgomez-service.cgomez.svc.cluster.local
+            host: strinity-service.cgomez.svc.cluster.local
 
